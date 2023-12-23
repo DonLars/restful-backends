@@ -7,9 +7,8 @@ function getQuote() {
   fetch("https://dummy-apis.netlify.app/api/quote")
     .then((response) => response.json())
     .then((data) => {
-      //quoteTag.textContent = "quote";
-      //authorTag.textContent = "author";
-
+      quoteTag.innerHTML = "";
+      authorTag.innerHTML = "";
       quoteTag.append(document.createTextNode("„" + data.quote + "“"));
       authorTag.append(document.createTextNode("- " + data.author + " -"));
     });
