@@ -1,7 +1,18 @@
+/* coustard-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Coustard";
+  font-style: normal;
+  font-weight: 400;
+  src: url("coustard-v16-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+html,
 body {
-  font-size: 2rem;
+  font-size: 1rem;
   background-color: #7f0799;
   font-weight: 300;
+  font-family: "Coustard", serif;
 }
 header {
   background-color: #292e1e;
@@ -12,6 +23,7 @@ header {
 
   h1 {
     color: #9649cb;
+    font-size: 3rem;
     font-weight: 700;
     margin: 0;
   }
@@ -23,13 +35,31 @@ blockquote {
   margin: 2rem auto;
   border: 0;
   padding: 5rem;
+  text-align: center;
 }
 quote {
-  font-size: 3rem;
+  font-size: 2rem;
   color: #fff;
+  line-height: 3rem;
+  text-shadow: 1px 1px 0px #333;
 }
-label {
-  margin-top: 1rem;
+
+.quotes::before,
+.quotes::after {
+  font-size: 3rem;
+  color: #490059;
+  text-shadow: none;
+}
+
+.quotes::before {
+  content: "„";
+}
+.quotes::after {
+  content: "”";
+}
+
+.author {
+  margin-top: 2rem;
   display: block;
   color: #d3fff3;
   font-style: italic;
