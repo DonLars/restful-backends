@@ -1,0 +1,37 @@
+body {
+  font-size: 2rem;
+  background-color: #7f0799;
+  font-weight: 300;
+}
+header {
+  background-color: #292e1e;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 4rem 0;
+
+  h1 {
+    color: #9649cb;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+blockquote {
+  border-radius: 2rem;
+  width: 70vw;
+  margin: 2rem auto;
+  border: 0;
+  padding: 5rem;
+}
+quote {
+  font-size: 3rem;
+  color: #fff;
+}
+label {
+  margin-top: 1rem;
+  display: block;
+  color: #d3fff3;
+  font-style: italic;
+  font-weight: normal;
+}
