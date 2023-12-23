@@ -1,4 +1,4 @@
-#Create a quote app using HTML, CSS and JavaScript.
+# Create a quote app using HTML, CSS and JavaScript.
 
 Use the Quote API to get quotes for your app.
 
