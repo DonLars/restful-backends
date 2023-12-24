@@ -21,11 +21,22 @@ header {
   align-items: center;
   padding: 4rem 0;
 
+  @media screen and (width < 992px) {
+    width: 80%;
+    justify-content: center;
+    margin: 2rem auto;
+    flex-flow: row wrap;
+  }
+
   h1 {
     color: #9649cb;
     font-size: 3rem;
     font-weight: 700;
     margin: 0;
+
+    @media screen and (width < 992px) {
+      margin-bottom: 2rem;
+    }
   }
 }
 
