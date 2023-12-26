@@ -84,3 +84,15 @@ input[type="range"]#green {
 input[type="range"]#blue {
   background: #0000ff;
 }
+
+button {
+  appearance: none;
+  border: 2px solid black;
+  border-radius: 6px;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background: #ccc;
+  }
+}
