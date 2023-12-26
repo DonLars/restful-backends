@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Mixer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <form id="form">
+        <label for="red"
+          ><span>red</span>
+          <input
+            class="mixer-range"
+            type="range"
+            id="red"
+            name="mixer-range"
+            step="1"
+            min="0"
+            max="255"
+            value="50"
+        /></label>
+        <label for="green"
+          ><span>green</span>
+          <input
+            class="mixer-range"
+            type="range"
+            id="green"
+            name="mixer-range"
+            step="1"
+            min="0"
+            max="255"
+            value="100"
+        /></label>
+        <label for="blue"
+          ><span>blue</span>
+          <input
+            class="mixer-range"
+            type="range"
+            id="blue"
+            name="mixer-range"
+            step="1"
+            min="0"
+            max="255"
+            value="150"
+        /></label>
+      </form>
+      <section id="rgb">
+        <!-- dynamic -->
+      </section>
+    </header>
+    <main id="main"><!-- dynamic --></main>
+    <script src="script.js"></script>
+  </body>
+</html>
