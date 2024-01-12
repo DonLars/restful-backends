@@ -28,8 +28,7 @@ function getPokemonData(url) {
 function render() {
   for (const pokemonItem of state.pokemonData) {
     const li = document.createElement("li");
-    li.innerText = pokemonItem.name;
-
+    li.innerHTML = `<a href='${pokemonItem.url}'>${pokemonItem.name}</a>`;
     document.querySelector(".list").appendChild(li);
   }
 }

@@ -1,0 +1,6 @@
+/* Custom Properties für Background? set custom attribute */
+
+.card {
+  background-repeat: no-repeat;
+  background-size: contain;
+}

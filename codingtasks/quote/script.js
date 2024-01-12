@@ -25,5 +25,4 @@ function render() {
   quoteTag.classList.remove("quotes");
   document.querySelector("button").addEventListener("click", getQuote);
 }
-
 render();
