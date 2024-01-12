@@ -1,4 +1,6 @@
-/* Custom Properties für Background? set custom attribute */
+/* Custom Properties für Background? set custom attribute 
+main.style.setProperty("--counter", 0 + "%");
+*/
 
 .card {
   background-repeat: no-repeat;
