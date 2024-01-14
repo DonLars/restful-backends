@@ -9,29 +9,60 @@
 
   <body>
     <main>
-      <article>
-        <section
-          style="
-            background-image: url('https://source.unsplash.com/random/300×300');
-          "
-          class="card"
-        >
-          <button class="close">X</button>
+      <section class="invitations">
+        <p>No peding invitations</p>
+        <a href="#">Manage</a>
+      </section>
+      <section class="headline">
+        <p>People you may know in Greater Nuermberg Metropolitan Area</p>
+        <a href="#">See all</a>
+      </section>
+      <ul id="cardlist">
+        <li class="card">
+          <button type="button" class="close">X</button>
+          <div
+            class="bg"
+            style="
+              background: url('https://source.unsplash.com/random/300×300');
+            "
+          ></div>
           <img
             class="picture"
             src="https://randomuser.me/api/portraits/women/79.jpg"
             alt="Mrs Danica Ferber"
           />
           <h3>
-            <span class="name-title">Mrs</span>
-            <span class="name-first">Danica</span>
-            <span class="name-last">Ferber</span>
+            <span class="salutation">Mrs</span>
+            <span class="firstname">Danica</span>
+            <span class="lastname">Ferber</span>
           </h3>
           <p class="title">Senio Developer</p>
           <div class="connections"><span>5</span>mutual connections</div>
-          <button>Connect</button>
-        </section>
-      </article>
+          <button type="button" class="connect">Connect</button>
+        </li>
+        <li class="card">
+          <div
+            class="bg"
+            style="
+              background-image: url('https://source.unsplash.com/random/300×300');
+            "
+          ></div>
+          <button class="close">X</button>
+          <img
+            class="picture"
+            src="https://randomuser.me/api/portraits/men/30.jpg"
+            alt="Mr Álvaro Navarro"
+          />
+          <h3>
+            <span class="salutation">Mr</span>
+            <span class="firstname">Álvaro</span>
+            <span class="lastname">Navarro</span>
+          </h3>
+          <p class="title">CEO</p>
+          <div class="connections"><span>2</span>mutual connections</div>
+          <button type="button" class="btn connect">Connect</button>
+        </li>
+      </ul>
     </main>
     <script src="script.js"></script>
   </body>
