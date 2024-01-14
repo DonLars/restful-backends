@@ -1,83 +1,64 @@
-/*
-<ul class="cardlist">
-        <li class="card">
-          <div
-            class="bg"
-            style="
-              background: url('https://source.unsplash.com/random/300×300');
-            "
-          ></div>
-          <button class="close">X</button>
-          <img
-            class="picture"
-            src="https://randomuser.me/api/portraits/women/79.jpg"
-            alt="Mrs Danica Ferber"
-          />
-          <h3>
-            <span class="name-title">Mrs</span>
-            <span class="name-first">Danica</span>
-            <span class="name-last">Ferber</span>
-          </h3>
-          <p class="title">Senior Developer</p>
-          <div class="connections"><span>5</span>mutual connections</div>
-          <button type="button" class="connect">Connect</button>
-        </li>
-</ul>
-
-  {
-    "name": {
-      "title": "Mr",
-      "first": "Valentín",
-      "last": "Fernández"
-    },
-    "title": "Test Engineer",
-    "picture": "https://randomuser.me/api/portraits/men/89.jpg",
-    "mutualConnections": 2,
-    "backgroundImage": ""
-  },
-*/
-
 "use strict";
 
-// Vars
-
+// List select
 const ul = document.querySelector("#cardlist");
-const li = document.createElement("li");
-const bg = document.createElement("div");
-const img = document.createElement("img");
-const h3 = document.createElement("h3");
-const salutation = document.querySelector(".salutation");
-const firstname = document.querySelector(".firstname");
-const lastname = document.querySelector(".lastname");
-const title = document.querySelector(".title");
-const mutualConnections = document.querySelector(".connections");
-const connectBtn = document.createElement("button");
-const closeBtn = document.createElement("button");
+const pending = document.querySelector(".pending");
+const pendingCount = document.querySelector(".pending span");
 
 // Set state
-
 const state = {
   id: null,
   mutualConnections: null,
-  pendingUsers: null,
+  pendingUsers: 0,
   cards: 8,
 };
 
-function createCardTemplate() {
+getPendingFromStorage();
+pendingCount.innerHTML = state.pendingUsers;
+
+// Get Pending from storage
+function getPendingFromStorage() {
+  if (localStorage.getItem("pendingUsers")) {
+    state.pendingUsers = JSON.parse(localStorage.getItem("pendingUsers"));
+  } else {
+    pending.innerHTML = `<span>No</span> pending invitation`;
+  }
+}
+
+function generateCardTemplate(user) {
+  //Create elements
+  const li = document.createElement("li");
+  const bg = document.createElement("div");
+  const img = document.createElement("img");
+  const h3 = document.createElement("h3");
+
+  const salutation = document.createElement("span");
+  const firstname = document.createElement("span");
+  const lastname = document.createElement("span");
+  const title = document.createElement("p");
+  const mutualConnections = document.createElement("p");
+
+  const connectBtn = document.createElement("button");
+  const closeBtn = document.createElement("button");
+
   li.classList.add("card");
   bg.classList.add("bg");
   img.classList.add("picture");
-  img.setAttribute("src", "https://randomuser.me/api/portraits/women/79.jpg");
-  bg.setAttribute(
-    "style",
-    "background: url('https://source.unsplash.com/random/300×300')"
+  img.setAttribute("src", user.picture);
+  bg.setAttribute("style", `background: url('${user.backgroundImage}')`);
+  img.setAttribute(
+    "alt",
+    `${user.name.title} ${user.name.first} ${user.name.last}`
   );
-  let fullname = salutation + firstname + lastname;
-  img.setAttribute("alt", fullname);
-  salutation.textContent = "Mrs" + " ";
-  firstname.textContent = "Monica" + " ";
-  lastname.textContent = "Mustermann";
-  title.textContent = "Senior";
+  salutation.textContent = `${user.name.title} `;
+  firstname.textContent = `${user.name.first} `;
+  lastname.textContent = `${user.name.last} `;
+  title.textContent = user.title;
+  title.classList.add("title");
+  if (user.mutualConnections > 0) {
+    mutualConnections.innerHTML = `<span>${user.mutualConnections}</span> Mutual Connections`;
+    mutualConnections.classList.add("connections");
+  }
   connectBtn.type = "button";
   connectBtn.textContent = "Connect";
   connectBtn.classList.add("connect");
@@ -90,51 +71,69 @@ function createCardTemplate() {
   li.appendChild(h3);
   h3.append(salutation, firstname, lastname);
   li.append(title, mutualConnections, connectBtn);
-  console.log(ul);
+
+  return li;
 }
 
-function getCardData(url) {
-  fetch(url)
+function loadCardsFromAPI() {
+  fetch(
+    `https://dummy-apis.netlify.app/api/contact-suggestions?count=${state.cards}`
+  )
     .then((response) => {
-      if (response.ok) {
-        return response.json();
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Received data from API:", data);
+
+      if (data && data.length > 0) {
+        for (const user of data) {
+          const card = generateCardTemplate(user);
+          ul.appendChild(card);
+        }
+        getPendingFromStorage();
+      } else {
+        console.error("Ungültige oder leere Ergebnisse in der API-Antwort.");
       }
     })
-    .then((jsonData) => {
-      console.log(jsonData.results);
-      //state.pokemonData = jsonData.results;
-      //state.nextItems = jsonData.next;
-      render();
-    })
     .catch((error) => {
-      alert("Sorry es gab einen Fehler. Versuche es später nochmal");
+      console.error("Error fetching or displaying the users:", error);
     });
 }
 
-function render() {
-  /*for (const pokemonItem of state.pokemonData) {
-    const li = document.createElement("li");
-    li.innerHTML = `<a href='${pokemonItem.url}'>${pokemonItem.name}</a>`;
-    document.querySelector(".list").appendChild(li);
-    
-  }*/
-}
-// Close Button
-document.querySelector(".close").addEventListener("click", () => {
-  // wenn cards weniger als 8, neu auffüllen bis 8
-  if (state.cards < 8) {
-    //getCardData();
+// EVENTLISTENER - connect
+ul.addEventListener("click", (event) => {
+  const connectBtn = event.target.closest(".connect");
+  if (connectBtn) {
+    const li = connectBtn.closest(".card");
+    const userIndex = Array.from(ul.children).indexOf(li);
+
+    if (connectBtn.textContent === "Connect") {
+      state.pendingUsers += 1;
+      pending.innerHTML = `<span>${
+        state.pendingUsers == 0 ? "no" : state.pendingUsers
+      }</span> pending invitation${state.pendingUsers == 1 ? "" : "s"}`;
+      connectBtn.textContent = "Pending";
+      li.style.opacity = 0.6;
+    } else if (connectBtn.textContent === "Pending") {
+      state.pendingUsers -= 1;
+      pending.innerHTML = `<span>${
+        state.pendingUsers == 0 ? "no" : state.pendingUsers
+      }</span> pending invitation${state.pendingUsers == 1 ? "" : "s"}`;
+      connectBtn.textContent = "Connect";
+      li.style.opacity = 1;
+    }
+    // Save to localstorage
+    localStorage.setItem("pendingUsers", JSON.stringify(state.pendingUsers));
   }
 });
 
 function init() {
   ul.innerHTML = "";
-
-  getCardData(
-    "https://dummy-apis.netlify.app/api/contact-suggestions?count=" +
-      state.cards
-  );
+  loadCardsFromAPI();
+  getPendingFromStorage();
 }
 
 init();
-createCardTemplate();
