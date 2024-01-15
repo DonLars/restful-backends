@@ -44,7 +44,13 @@ ul {
   list-style-type: none;
   padding-left: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
   gap: 1rem;
 }
 
