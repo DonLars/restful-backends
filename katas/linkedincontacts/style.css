@@ -62,11 +62,11 @@ li.card {
   text-align: center;
   position: relative;
   background: white;
+  padding-bottom: 5rem;
   /*display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;*/
-
   .bg {
     z-index: 0;
     position: absolute;
@@ -130,6 +130,9 @@ li.card {
     border-radius: 2rem;
     background: white;
     cursor: pointer;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 1rem;
     &:hover {
       background: #0967c0;
       color: white;
