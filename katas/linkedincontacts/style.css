@@ -62,6 +62,10 @@ li.card {
   text-align: center;
   position: relative;
   background: white;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;*/
 
   .bg {
     z-index: 0;

@@ -130,6 +130,17 @@ ul.addEventListener("click", (event) => {
   }
 });
 
+// EVENTLISTENER - close
+ul.addEventListener("click", (event) => {
+  const closeBtn = event.target.closest(".close");
+  const closeLi = closeBtn.closest(".card");
+  closeLi.remove();
+  // auffüllen
+  ul.innerHTML = "";
+
+  loadCardsFromAPI();
+});
+
 function init() {
   ul.innerHTML = "";
   loadCardsFromAPI();
