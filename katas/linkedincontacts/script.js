@@ -1,5 +1,8 @@
 "use strict";
 
+// TODO:
+//  While LinkedIn shows the number of connections OR the company name you should always show the number of mutual connections
+
 // List select
 const ul = document.querySelector("#cardlist");
 const pending = document.querySelector(".pending");
@@ -10,7 +13,6 @@ const state = {
   id: null,
   mutualConnections: null,
   pendingUsers: 0,
-  cards: 8,
 };
 
 getPendingFromStorage();
@@ -75,9 +77,9 @@ function generateCardTemplate(user) {
   return li;
 }
 
-function loadCardsFromAPI() {
+function loadCardsFromAPI(numOfCards) {
   fetch(
-    `https://dummy-apis.netlify.app/api/contact-suggestions?count=${state.cards}`
+    `https://dummy-apis.netlify.app/api/contact-suggestions?count=${numOfCards}`
   )
     .then((response) => {
       if (!response.ok) {
@@ -136,14 +138,12 @@ ul.addEventListener("click", (event) => {
   const closeLi = closeBtn.closest(".card");
   closeLi.remove();
   // auffüllen
-  ul.innerHTML = "";
-
-  loadCardsFromAPI();
+  loadCardsFromAPI(1);
 });
 
 function init() {
   ul.innerHTML = "";
-  loadCardsFromAPI();
+  loadCardsFromAPI(8);
   getPendingFromStorage();
 }
 
