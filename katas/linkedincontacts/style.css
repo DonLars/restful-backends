@@ -120,6 +120,7 @@ li.card {
       font-weight: bold;
     }
   }
+
   .connect {
     color: #0967c0;
     width: 90%;
@@ -137,5 +138,19 @@ li.card {
       background: #0967c0;
       color: white;
     }
+  }
+}
+
+button.cancel {
+  border: 0;
+  background: #0967c0;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  &:hover {
+    background: #666;
+    color: #fff;
   }
 }

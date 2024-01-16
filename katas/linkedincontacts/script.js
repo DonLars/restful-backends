@@ -1,11 +1,9 @@
 "use strict";
 
-// TODO:
-//  While LinkedIn shows the number of connections OR the company name you should always show the number of mutual connections
-
 // List select
 const ul = document.querySelector("#cardlist");
 const pending = document.querySelector(".pending");
+const cancel = document.querySelector(".cancel");
 const pendingCount = document.querySelector(".pending span");
 
 // Set state
@@ -97,7 +95,7 @@ function loadCardsFromAPI(numOfCards) {
         }
         getPendingFromStorage();
       } else {
-        console.error("Ungültige oder leere Ergebnisse in der API-Antwort.");
+        console.error("Invalid or empty results in API response.");
       }
     })
     .catch((error) => {
@@ -105,7 +103,7 @@ function loadCardsFromAPI(numOfCards) {
     });
 }
 
-// EVENTLISTENER - connect
+// EVENTLISTENER - connect button
 ul.addEventListener("click", (event) => {
   const connectBtn = event.target.closest(".connect");
   if (connectBtn) {
@@ -132,13 +130,25 @@ ul.addEventListener("click", (event) => {
   }
 });
 
-// EVENTLISTENER - close
+// EVENTLISTENER - cancel button
+cancel.addEventListener("click", (event) => {
+  // delete complete storage
+  localStorage.removeItem("pendingUsers");
+  getPendingFromStorage();
+});
+
+// EVENTLISTENER - close button
 ul.addEventListener("click", (event) => {
   const closeBtn = event.target.closest(".close");
-  const closeLi = closeBtn.closest(".card");
-  closeLi.remove();
-  // auffüllen
-  loadCardsFromAPI(1);
+  if (closeBtn) {
+    const closeLi = closeBtn.closest(".card");
+    // delete active
+    if (closeLi) {
+      closeLi.remove();
+      // add one card
+      loadCardsFromAPI(1);
+    }
+  }
 });
 
 function init() {
