@@ -1,5 +1,6 @@
 "use strict";
 
+// Cards in State
 // Random Background Image
 
 // List select
@@ -12,9 +13,13 @@ const pendingCount = document.querySelector(".pending span");
 
 // Set state
 const state = {
+  id: null,
+  mutualConnections: null,
   pendingUsers: 0,
   people: [],
 };
+
+co;
 
 getPendingFromStorage();
 pendingCount.innerHTML = state.pendingUsers;
@@ -78,7 +83,7 @@ function generateCardTemplate(user) {
   return li;
 }
 
-function loadCardsFromAPI(numOfCards) {
+/*function loadCardsFromAPI(numOfCards) {
   fetch(
     `https://dummy-apis.netlify.app/api/contact-suggestions?count=${numOfCards}`
   )
@@ -97,7 +102,7 @@ function loadCardsFromAPI(numOfCards) {
     .catch((error) => {
       console.error("Error fetching or displaying the users:", error);
     });
-}
+}*/
 
 function render() {
   const data = state.people;
@@ -163,7 +168,7 @@ ul.addEventListener("click", (event) => {
 
 function init() {
   ul.innerHTML = "";
-  loadCardsFromAPI(8);
+  //loadCardsFromAPI(8);
   getPendingFromStorage();
 }
 
