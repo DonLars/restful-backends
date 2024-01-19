@@ -44,11 +44,15 @@ function generateCardTemplate(user) {
   const connectBtn = document.createElement("button");
   const closeBtn = document.createElement("button");
 
+  user.backgroundImage = user.backgroundImage + "-" + randomNum(); // set backgroundImage + Random 1-9
+  console.log(user.backgroundImage);
+
   li.classList.add("card");
   bg.classList.add("bg");
   img.classList.add("picture");
   img.setAttribute("src", user.picture);
   bg.setAttribute("style", `background: url('${user.backgroundImage}')`);
+  //bg.style.setProperty("--my-var", jsVar + 4);
   img.setAttribute(
     "alt",
     `${user.name.title} ${user.name.first} ${user.name.last}`
@@ -99,6 +103,13 @@ function loadCardsFromAPI(numOfCards) {
     });
 }
 
+// Random number
+
+function randomNum() {
+  return Math.floor(Math.random() * 10);
+}
+
+// Renderfunction
 function render() {
   const data = state.people;
 
