@@ -45,7 +45,6 @@ function generateCardTemplate(user) {
   const closeBtn = document.createElement("button");
 
   user.backgroundImage = user.backgroundImage + "-" + randomNum(); // set backgroundImage + Random 1-9
-  console.log(user.backgroundImage);
 
   li.classList.add("card");
   bg.classList.add("bg");
